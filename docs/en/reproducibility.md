@@ -26,7 +26,7 @@ python -m vacant_home train --stage report
 python -m vacant_home high-power --fit --audit-amplitude
 ```
 
-The research sequence includes small TCN/GRU/contrastive ablations and 100 corrected permutation repetitions. CPU reproduction can take substantial time. These commands are explicit training operations; inference and peer audit never start them automatically.
+CPU training can take substantial time. These commands are explicit training operations; inference and peer audit never start them automatically.
 
 Fixed seeds, subtype balancing, medium-support weights, prior settings and engineering Tier gates are recorded in source and the specialist decision specification. Daily rows remain grouped by meter for supervision. Protected users never enter self-supervised fitting or cohort/prototype references.
 

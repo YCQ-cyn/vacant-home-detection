@@ -229,7 +229,7 @@ The output term is **high-power vacancy screening candidate**. Subtype is report
 - Tier A core candidates: {int(frame.hp_candidate_tier.eq('A').sum())}.
 - Tier B secondary review candidates: {int(frame.hp_candidate_tier.eq('B').sum())}.
 
-## Frozen Recognition failure mode
+## Recognition output overview
 
 ### Current recognition classes within the frozen {len(frozen_high)}-user high-power cohort
 
@@ -245,7 +245,7 @@ The output term is **high-power vacancy screening candidate**. Subtype is report
 
 The two tables are deliberately separate. The first audits the frozen main-model field. The second uses the pre-registered specialist qualification definition and does not rewrite the original result.
 
-The global model and Legacy consensus inherited a negative magnitude shortcut because the historical positive set scarcely covers persistent high-load vacancy. The new branch does not lower the frozen Recognition threshold. It re-ranks only inside a pre-defined high-power cohort using magnitude-resistant behavior evidence.
+Historical positives scarcely cover persistent high-load vacancy. The specialist branch ranks users within the high-power cohort using magnitude-resistant behavior evidence while preserving the main Recognition threshold.
 
 ## Legacy power coverage and historical selection bias
 
@@ -265,7 +265,7 @@ Candidates differ from ordinary high-power normal-use cases because they combine
 
 ## Additional runtime-specified audit objects
 
-These users were audited after the rule was frozen. They were not used as preset answers or to tune thresholds.
+Runtime-specified users are scored against the fixed rules and reference cohort.
 
 {markdown_table(audit_rows, ['meter_id','hp_candidate_tier','raw_median_power','raw_q90_power','baseline_floor','frozen_sample_gt_1kw_fraction','daily_sample_median_gt_1kw_count','human_interaction_evidence','active_evidence_score','automatic_control_compatibility','equipment_only_similarity_percentile','hp_conditional_rank','stability_rank_p10','future_holdout_flag','candidate_reason_codes'], rows=len(audit_rows))}
 
@@ -273,21 +273,13 @@ These users were audited after the rule was frozen. They were not used as preset
 
 {markdown_table(scale_summary, rows=len(scale_summary))}
 
-This experiment holds the 29 confirmed equipment-maintained Legacy temporal patterns fixed and changes amplitude only. The Recognition global response, Behavior embedding cosine, specialist-branch score and conditional rank are all reported for ×1/×2/×5/×10. The diagnostic thresholds were frozen before the results and were not adjusted afterward.
-
-Robustness applies to Daily-TCN Behavior representation and final conditional rank; behavior-only PU raw scores are not claimed to be amplitude-invariant.
-
-## Old Word method decision path
-
-The original report used fixed 0.5 kW behavior-level and daily-load decision paths and described equipment-maintained examples mainly in a low-baseload range. For a persistent high-load candidate, that path tends to treat the large load as human-use evidence. This branch instead asks whether the 42-day structure is compatible with sustained automatic/background control while lacking persistent human interaction.
-
-This is a **decision-path comparison based on the report**, not a full reproduction of the historical XGBoost model. The project does not have the complete original March feature pipeline/model in this branch, and periodic frozen samples are not converted to true kWh.
+Behavior-only PU raw scores are not guaranteed to be amplitude-invariant.
 
 ## Minimal business verification recommendation
 
 {recommendation}
 
-Business verification should first check actual residential/special-use status, shared-meter possibility, supply/meter state, and whether sustained equipment operation can occur without occupants. A positive review would validate the repaired high-power boundary; a negative review would reveal which confounder the branch must learn.
+Business verification should check actual residential/special-use status, shared-meter possibility, supply/meter state, and whether sustained equipment operation can occur without occupants.
 
 ## What remains uncertain
 

@@ -1,8 +1,8 @@
-# Recognition Research Notes
+# Method References
 
 [中文](../zh/research_notes.md) | **English**
 
-Access date: 2026-09-26. These notes record methods considered for the first complete candidate. They are not evidence of physical vacancy accuracy.
+These references explain the methods and their business motivation. The literature is not evidence of this project's vacancy recognition accuracy.
 
 ## Positive-unlabeled recognition
 
@@ -29,7 +29,6 @@ Access date: 2026-09-26. These notes record methods considered for the first com
 - Elkan, C. and Noto, K. *Learning classifiers from only positive and unlabeled data*. KDD 2008. DOI: https://doi.org/10.1145/1401890.1401920
 - du Plessis, M., Niu, G. and Sugiyama, M. *Class-prior estimation for learning from positive and unlabeled data*. Machine Learning 2017. DOI: https://doi.org/10.1007/s10994-016-5589-8
 - Decision: prior values are sensitivity/regularization settings only. They are not interpreted as the population vacancy prevalence because Legacy labeling is feature-dependent.
-- Implementation audit: an earlier draft floored the U comparison weight at 0.12, making prior settings 0.06 and 0.10 identical. Recognition uses a continuous weight scaling centered at 0.10 so every prior setting is a real perturbation. The resulting sensitivity is still not a class-prior estimate.
 
 ## Time-series representation
 
@@ -37,17 +36,13 @@ Access date: 2026-09-26. These notes record methods considered for the first com
 
 - Bai, S., Kolter, J. Z. and Koltun, V. *An Empirical Evaluation of Generic Convolutional and Recurrent Networks for Sequence Modeling*. arXiv:1803.01271: https://arxiv.org/abs/1803.01271
 - Problem addressed: learn multi-scale daily and 42-day structure with a compact receptive field and stable training.
-- Decision: retain residual dilated Conv1D blocks with dilations 1,2,4,8. Compare hidden widths 32 and 64 only; no broad architecture search.
+- Method: compact residual dilated Conv1D blocks with dilations 1, 2, 4, 8 encode multi-scale behavior.
 
 ### TS2Vec-style hierarchical contextual contrast
 
 - Yue, Z. et al. *TS2Vec: Towards Universal Representation of Time Series*. AAAI 2022. DOI: https://doi.org/10.1609/aaai.v36i8.20881 ; official authors' code: https://github.com/zhihanyue/ts2vec
 - Problem addressed: masked reconstruction alone can learn local amplitude shortcuts and may fail to organize behaviorally similar contexts.
-- Decision: test a bounded TS2Vec-style objective with instance and timestamp contrast at multiple max-pooled scales. It uses aligned masked views only. Time shifts, warps and shuffles are rejected because clock time is business information. This implementation is described as “TS2Vec-style”, not as a byte-for-byte reproduction.
-
-### Long-horizon encoder
-
-- Decision: compare a small Temporal TCN against a one-layer GRU. Tasks are masked-day prediction, 14/21/28/42-day consistency and temporal-order discrimination. A Transformer is rejected for the first model because there are only 1,827 user sequences and no demonstrated failure requiring its larger search space.
+- Method: hierarchical contextual contrast uses aligned masked views to preserve clock-time information.
 
 ## Smart-meter and occupancy context
 
@@ -61,18 +56,9 @@ Access date: 2026-09-26. These notes record methods considered for the first com
 ## Active learning and protected review
 
 - Settles, B. *Active Learning Literature Survey*. University of Wisconsin-Madison, 2009: https://minds.wisconsin.edu/handle/1793/60660
-- Problem addressed: if only 10-20 future labels are approved, choosing only top scores wastes review budget and biases validation.
+- Problem addressed: choosing only top scores under a limited review budget biases validation.
 - Decision: freeze two groups before Recognition fitting: 10 fixed-seed stratified RANDOM_BLIND cases and 20 diversity-aware TARGETED_CHALLENGE cases. The targeted set combines disagreement, conflict, high-power automatic-compatible, low-power rich-activity, smooth modulation and manifold novelty. It is for failure discovery, never population-unbiased accuracy.
-
-## Business-physics source
-
-The private historical Word report supplies observations about resident baseload, automatic equipment backgrounds, sparse return episodes, low-load inhabited homes and weekend use. Its fixed daily-energy and 0.5kW rules are not replicated as final decisions. The report itself is not distributed.
 
 ## Point-semantics boundary
 
 Periodic frozen-power sampling can miss and alias short events. Full-interval averaging and amplitude dilution cannot be assumed without device-specific evidence. Runs are sample counts; only cumulative-register differences establish true energy.
-
-## Representation implementation audit
-
-- During the first full training attempt, the amplitude-scaling augmentation changed only `signed_log_power`, while the behavior branch consumed `signed_log_difference` rather than that absolute-power channel. The nominal behavior-invariance loss was therefore largely vacuous and partly confounded with masking.
-- The incomplete attempt was stopped. The corrected implementation recomputes `signed_log_difference` after scaling and compares unmasked original versus scaled behavior embeddings. All research representations used for model selection are retrained from the frozen scope after this repair.

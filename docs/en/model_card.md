@@ -8,7 +8,7 @@ Long-horizon residential vacancy screening, ranking, subtype evidence and review
 
 ## Selected implementation
 
-Dual-branch daily TCN + semantics-robust features + Bagging PU HGB. Behavior and magnitude branches each emit 32 dimensions. Dilations are 1, 2, 4, 8. Long-horizon TCN, GRU, hierarchical contrast, propensity-aware PU, regional factors and nnPU are experimental comparators.
+Dual-branch daily TCN + semantics-robust features + Bagging PU HGB. Behavior and magnitude branches each emit 32 dimensions. Dilations are 1, 2, 4, 8.
 
 ## Supervision
 
@@ -32,7 +32,7 @@ Historical positive selection heavily underrepresents sustained high-load vacanc
 
 Routes: high vacancy suspicion, moderate vacancy suspicion, likely active use, uncertain and invalid data. Specialist Tier A is a high-power vacancy screening candidate, with subtype reported separately.
 
-Amplitude counterfactuals support robustness of Behavior representation and final HP rank, not invariance of behavior-only PU raw scores.
+Behavior-only PU raw scores are not guaranteed to be amplitude-invariant.
 
 ## Distribution
 

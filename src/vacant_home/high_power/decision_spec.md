@@ -138,5 +138,3 @@ Every Tier A/B row reports missingness, negative/unresolved samples, peak concen
 - The branch finds and ranks all qualifying users across the full 1,827-user output. It does not stop after one candidate.
 - Future holdout users may appear only after the complete rule and model artifacts are frozen. Their inference is clearly marked.
 - No output is a vacancy probability, confirmed vacancy, Gold accuracy, precision, recall, or F1.
-- The old Word method is analyzed only as a documented decision path; it is not presented as a full model reproduction.
-

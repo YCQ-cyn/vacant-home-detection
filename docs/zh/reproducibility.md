@@ -26,7 +26,7 @@ python -m vacant_home train --stage report
 python -m vacant_home high-power --fit --audit-amplitude
 ```
 
-CPU训练可能较长，包括小规模表示消融和100次交叉验证置换。推理与同侪审计不会自动训练。固定种子、soft权重、prior和门槛在源码与专项决策规范中记录。日监督按户分组，保护用户不进入任何拟合或参考。
+CPU训练可能较长。推理与同侪审计不会自动训练。固定种子、soft权重、prior和门槛在源码与专项决策规范中记录。日监督按户分组，保护用户不进入任何拟合或参考。
 
 标签交叉验证不等于表示逐fold隔离；研究SSL为允许池内传导式评价。
 
