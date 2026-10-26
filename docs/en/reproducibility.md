@@ -30,7 +30,7 @@ CPU training can take substantial time. These commands are explicit training ope
 
 Fixed seeds, subtype balancing, medium-support weights, prior settings and engineering Tier gates are recorded in source and the specialist decision specification. Daily rows remain grouped by meter for supervision. Protected users never enter self-supervised fitting or cohort/prototype references.
 
-PU evaluation is label-cross-fitted. Research representations are transductive within the permitted research pool, so daily-embedding representation gains are exploratory; they must not be upgraded to fully fold-isolated inductive claims.
+PU evaluation uses label cross-fitting. Representations are transductive within the permitted training pool; this evaluation does not establish fully fold-isolated inductive performance.
 
 ## Frozen inference
 

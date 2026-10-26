@@ -24,7 +24,7 @@ Thirty future-review meters were frozen before fitting: 10 stratified RANDOM_BLI
 
 ## Evaluation qualification
 
-PU labels are held out by meter. Research SSL representations and rank transforms were fitted jointly on the allowed research pool. This is label-cross-fitted, research-pool transductive evidence; it is not fully fold-isolated user-level representation validation. The direct-feature comparator is the cleaner strict reference.
+PU labels are held out by meter. SSL representations and rank transforms are fitted jointly on the permitted training pool. Evaluation therefore uses label cross-fitting with transductive representations; it does not provide fully fold-isolated user-level representation validation.
 
 Historical positive selection heavily underrepresents sustained high-load vacancy. The specialist branch addresses that failure mode, but candidates remain unconfirmed. Automatic compatibility is curve compatibility, not proof of an appliance or environmental driver.
 

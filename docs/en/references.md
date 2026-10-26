@@ -1,6 +1,6 @@
 # Method References
 
-[中文](../zh/research_notes.md) | **English**
+[中文](../zh/references.md) | **English**
 
 These references explain the methods and their business motivation. The literature is not evidence of this project's vacancy recognition accuracy.
 
@@ -10,25 +10,25 @@ These references explain the methods and their business motivation. The literatu
 
 - Mordelet, F. and Vert, J.-P. *A bagging SVM to learn from positive and unlabeled examples*. Pattern Recognition Letters 37 (2014), 201-209. DOI: https://doi.org/10.1016/j.patrec.2013.06.007
 - Problem addressed: U contains both active and unrecorded-vacancy users, so a single P-versus-all-U classifier is sensitive to which U cases are treated as comparison examples.
-- Decision: adopt bagged U subsampling as the primary auditable PU mechanism, using HGB and logistic heads. Sampled U receives an internal comparison target only inside each bag; it is never described as a confirmed negative.
+- Application: bagged U subsampling provides the PU comparison mechanism, using HGB and logistic heads. Sampled U receives an internal comparison target only inside each bag and remains unlabeled.
 
 ### SCAR, SAR and propensity-aware PU
 
 - Bekker, J. and Davis, J. *Learning from Positive and Unlabeled Data under the Selected At Random Assumption*. arXiv:1808.08755 and later journal/conference versions: https://arxiv.org/abs/1808.08755
 - Problem addressed: Legacy positives were selected because some curve patterns were easier for experts to recognize. Selection probability therefore plausibly depends on zero fraction, long silence, magnitude and obvious intermittency.
-- Decision: SCAR is not assumed. A separate, explicitly named Legacy-selection propensity model is used only to reweight labeled positives. Propensity inputs are audited and never passed to the vacancy head as a score. Identifiability is still incomplete with P+U alone, so SAR is an ablation rather than unquestioned truth.
+- Application: a historical-positive selection propensity model reweights labeled positives. Its inputs are audited separately from the vacancy score. P+U alone cannot fully identify the labeling mechanism.
 
 ### nnPU
 
 - Kiryo, R. et al. *Positive-Unlabeled Learning with Non-Negative Risk Estimator*. NeurIPS 2017. Official proceedings: https://papers.nips.cc/paper_files/paper/2017/hash/7cce53cf90577442771720a370c3c723-Abstract.html ; arXiv: https://arxiv.org/abs/1703.00593
 - Problem addressed: unbiased PU risk can become negative and overfit with flexible models.
-- Decision: implement a small 64-32-1 MLP as sensitivity only. Its class prior is uncertain under SAR, so it cannot be the sole primary model and its output is not a probability.
+- Application: non-negative PU risk controls negative-risk overfitting. Uncertain class priors require sensitivity checks, and outputs are not calibrated vacancy probabilities.
 
 ### Class prior
 
 - Elkan, C. and Noto, K. *Learning classifiers from only positive and unlabeled data*. KDD 2008. DOI: https://doi.org/10.1145/1401890.1401920
 - du Plessis, M., Niu, G. and Sugiyama, M. *Class-prior estimation for learning from positive and unlabeled data*. Machine Learning 2017. DOI: https://doi.org/10.1007/s10994-016-5589-8
-- Decision: prior values are sensitivity/regularization settings only. They are not interpreted as the population vacancy prevalence because Legacy labeling is feature-dependent.
+- Application: prior values are sensitivity/regularization settings. They do not estimate population vacancy prevalence under feature-dependent historical labeling.
 
 ## Time-series representation
 
@@ -51,13 +51,13 @@ These references explain the methods and their business motivation. The literatu
 - REFIT: Murray, D., Stankovic, L. and Stankovic, V. *An electrical load measurements dataset of United Kingdom households from a two-year longitudinal study*. Scientific Data 4, 160122 (2017). DOI: https://doi.org/10.1038/sdata.2016.122 ; dataset: https://pureportal.strath.ac.uk/en/datasets/refit-electrical-load-measurements-cleaned
 - REDD: Kolter, J. Z. and Johnson, M. J. *REDD: A public data set for energy disaggregation research*. SustKDD 2011. Project reference: http://redd.csail.mit.edu/
 - Pecan Street Dataport: https://www.pecanstreet.org/dataport/
-- Decision: these sources support the use of shape, transitions, recurrence and long-horizon behavior, but they are not mixed into training. Sampling semantics, geography, household behavior, submeter/whole-home definitions and access terms differ from the current 15-minute periodic frozen-power samples.
+- Application: these sources support shape, transitions, recurrence and long-horizon behavior modeling. Their data are not included in training because sampling semantics, geography, household behavior, meter definitions and access terms differ.
 
 ## Active learning and protected review
 
 - Settles, B. *Active Learning Literature Survey*. University of Wisconsin-Madison, 2009: https://minds.wisconsin.edu/handle/1793/60660
 - Problem addressed: choosing only top scores under a limited review budget biases validation.
-- Decision: freeze two groups before Recognition fitting: 10 fixed-seed stratified RANDOM_BLIND cases and 20 diversity-aware TARGETED_CHALLENGE cases. The targeted set combines disagreement, conflict, high-power automatic-compatible, low-power rich-activity, smooth modulation and manifold novelty. It is for failure discovery, never population-unbiased accuracy.
+- Application: combine stratified random blind review with diverse targeted challenges. Random review supports population assessment; targeted review identifies failure cases and does not provide population-unbiased accuracy.
 
 ## Point-semantics boundary
 

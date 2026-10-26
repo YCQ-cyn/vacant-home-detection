@@ -1,14 +1,14 @@
-# 研究参考
+# 方法参考
 
-**中文** | [English](../en/research_notes.md)
+**中文** | [English](../en/references.md)
 
-以下记录方法来源、所解决的业务问题及采用依据。文献本身不构成本项目的识别效果证据。
+以下列出方法来源及其用途。文献本身不构成本项目的识别效果证据。
 
 | 来源 | 解决的问题与选择 |
 | --- | --- |
 | [Bagging PU](https://doi.org/10.1016/j.patrec.2013.06.007) | U混有未标空置，采用抽样U的bagging对照，U不变成正常真值 |
-| [SAR-PU](https://arxiv.org/abs/1808.08755) | 历史选择与明显静默、功率、间歇性相关；倾向加权仅作消融，P+U机制不完全可识别 |
-| [nnPU](https://arxiv.org/abs/1703.00593) | 防止PU负风险过拟合；小MLP仅做敏感性，prior不确定 |
+| [SAR-PU](https://arxiv.org/abs/1808.08755) | 解释历史正样本的选择偏差及倾向加权；仅凭P+U不能完全识别标注机制 |
+| [nnPU](https://arxiv.org/abs/1703.00593) | 非负PU风险估计；类别先验不确定时需检查敏感性 |
 | [Elkan–Noto](https://doi.org/10.1145/1401890.1401920) | P/U学习基础；不把未知标注机制下的输出当真概率 |
 | [Class prior](https://doi.org/10.1007/s10994-016-5589-8) | prior仅用于敏感性，不称真实空置率 |
 | [TCN](https://arxiv.org/abs/1803.01271) | 小型残差膨胀卷积学习多尺度行为，膨胀率为1、2、4、8 |

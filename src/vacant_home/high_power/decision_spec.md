@@ -1,9 +1,9 @@
 # High-Power Branch Decision Specification
 
-Status: PRE-REGISTERED BEFORE CANDIDATE SCORING  
-Stage: `HIGH_POWER_VACANCY_DISCOVERY`  
-Point semantics: 15-minute periodic frozen active-power samples（15分钟周期冻结有功功率样本）  
-Gold or new human labels used: no
+- Rule policy: fixed before candidate scoring
+- Stage: `HIGH_POWER_VACANCY_DISCOVERY`
+- Point semantics: 15-minute periodic frozen active-power samples（15分钟周期冻结有功功率样本）
+- Gold or new human labels used: no
 
 ## Immutable upstream and identity rules
 
@@ -135,6 +135,6 @@ Every Tier A/B row reports missingness, negative/unresolved samples, peak concen
 
 ## Output interpretation
 
-- The branch finds and ranks all qualifying users across the full 1,827-user output. It does not stop after one candidate.
+- The branch finds and ranks all qualifying users in the full input cohort.
 - Future holdout users may appear only after the complete rule and model artifacts are frozen. Their inference is clearly marked.
 - No output is a vacancy probability, confirmed vacancy, Gold accuracy, precision, recall, or F1.

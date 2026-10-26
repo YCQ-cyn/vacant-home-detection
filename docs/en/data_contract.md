@@ -18,7 +18,7 @@ All paths below are relative to `VACANT_HOME_WORKSPACE/recognition`. No correspo
 | `inputs/daily_inputs.npz` | Float32 `x`: daily rows × 8 channels × 96 samples |
 | `inputs/daily_input_index.csv` | Meter/date rows aligned exactly with `x` |
 
-The publication preserves the current project's prepared-input boundary. It does not fabricate missing raw-to-feature extraction, provenance, labels or scout results. An installation with source code alone can run tests and inspect methods; real-cohort training requires this private prepared input set.
+Training requires the complete prepared input set, including features, provenance, labels and preliminary screening results. Raw-to-feature preprocessing is outside this package's interface. Source-only installations support tests and method inspection.
 
 ## Daily curves
 
@@ -41,12 +41,12 @@ Keep masked values finite in the prepared encoder tensor; retain the masks inste
 
 `training_scope.csv` fields: `meter_id`, `data_invalid`, `strict_all_zero`, `model_a_fit`, `shadow_fit_excluding_gold_test`, `literal_transductive_full_fit`, `legacy_high_hard`, `legacy_medium_soft`, `legacy_low_diagnostic_only`, `protected_cohort`.
 
-Preparation creates `fit_scope.csv`, `future_human_holdout_manifest.csv` and `future_human_holdout_freeze.json`. The current deployment contract retains 30 held users, split 10 random blind / 20 targeted challenge. Freeze these before SSL or any reference/fit. A source export does not authorize replacing an existing protected holdout.
+Preparation creates `fit_scope.csv`, `future_human_holdout_manifest.csv` and `future_human_holdout_freeze.json`. The input contract requires 30 held users, split 10 random blind / 20 targeted challenge. Freeze these before SSL or any reference/fit. Existing protected holdouts must remain unchanged.
 
 ## Inference inputs and outputs
 
 `final_fit_feature_table.parquet` contains `meter_id` plus the fitted robust and embedding columns. `models/final_pu_channels.joblib` stores per-channel estimators and frozen rank references. `models/conditional_subtype.joblib` stores subtype preprocessing/classifiers/prototypes. A compatible fitted model is supplied locally.
 
-`infer` outputs the selected PU evidence score/rank and four conditional subtype supports. The full training validation/report flow adds routers, independent axes, consensus, conflict, stability and the business screening classes. Core `infer` does not pretend to regenerate the entire full-cohort business result.
+`infer` outputs the selected PU evidence score/rank and four conditional subtype supports. The full training validation/report flow adds routers, independent axes, consensus, conflict, stability and the business screening classes.
 
 The specialist branch requires local final embeddings, `screening_results.csv`, fit scope, protected holdout manifest and expert positives. All outputs go to `VACANT_HOME_WORKSPACE/high_power`.

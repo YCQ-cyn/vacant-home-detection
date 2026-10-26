@@ -28,7 +28,7 @@ Tier A requires positive valid support from all three families plus pre-register
 
 Use positive label cross-fitting, positive-versus-power-matched-U rank advantage with bootstrap intervals, cross-fitted fake-positive permutation controls, leave-subtype-out, absolute high-power/low-power-rich-activity challenge cohorts, window/seed/prior sensitivity and amplitude counterfactuals.
 
-No fresh negative Gold labels exist. Historical recovery and P-versus-U separation can reward selection bias; neither supplies true classification accuracy. The implementation and reports disclose research-pool transductive representation fitting.
+No fresh negative Gold labels exist. Historical recovery and P-versus-U separation can reward selection bias; neither supplies true classification accuracy. Representation fitting is transductive within the permitted training pool.
 
 ## Matched peers
 

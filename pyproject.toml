@@ -6,7 +6,6 @@ build-backend = "setuptools.build_meta"
 name = "vacant-home-detection"
 version = "0.1.0"
 description = "Vacant-home recognition from residential power time series"
-readme = "README.md"
 requires-python = ">=3.11,<3.14"
 dependencies = [
     "numpy>=2.1,<3",
@@ -35,4 +34,3 @@ where = ["src"]
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = ["src"]
-

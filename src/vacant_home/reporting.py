@@ -83,7 +83,7 @@ def select_top_cases(results):
         & ~results.future_holdout_flag.fillna(False).astype(bool)
     ]
     take("novel_high_vacancy", nonzero.sort_values(["vacancy_screening_score", "legacy_anchor_rank"], ascending=[False, True]), 4)
-    take("true_high_power_automatic_candidate", nonzero[bool_mask(nonzero.high_power_automatic_challenge)].sort_values("vacancy_screening_score", ascending=False), 4)
+    take("high_power_automatic_candidate", nonzero[bool_mask(nonzero.high_power_automatic_challenge)].sort_values("vacancy_screening_score", ascending=False), 4)
     take("low_power_rich_activity", nonzero[bool_mask(nonzero.low_power_rich_activity_challenge)].sort_values("active_evidence_score", ascending=False), 3)
     take("vacancy_active_conflict", nonzero[bool_mask(nonzero.model_conflict)].sort_values("model_disagreement", ascending=False), 3)
     take("uncertain_disagreement", nonzero.sort_values("model_disagreement", ascending=False), 3)
